@@ -9,6 +9,23 @@ export const getAllProducts = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+export const getProductById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const { data, error } = await supabase
+      .from('Product')
+      .select('*')
+      .eq('id', id)
+      .single(); // Ensure it returns a single object instead of an array
+
+    if (error) throw error;
+    res.json(data);
+  } catch (error) {
+    console.error('Error fetching product by ID:', error);
+    res.status(404).json({ error: 'Product not found' });
+  }
+};
 
 export const getProductsByCategory = async (req, res) => {
   const { category } = req.params;

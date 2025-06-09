@@ -10,9 +10,17 @@ import checkoutRoutes from './routes/checkoutRoutes.js'
 const app = express();
 
 app.use(cors({
-  origin: 'https://crochetingmyway.shop',
+  origin: function (origin, callback) {
+    const allowedOrigins = ['https://crochetingmyway.shop', 'http://localhost:3000'];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
 }));
+
 
 app.use(express.json());
 app.use(cookieParser());

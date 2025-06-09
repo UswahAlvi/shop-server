@@ -11,7 +11,7 @@ const app = express();
 
 app.use(cors({
   origin: function (origin, callback) {
-    const allowedOrigins = ['https://crochetingmyway.shop', 'http://localhost:3000'];
+    const allowedOrigins = ['https://crochetingmyway.shop', 'http://localhost:5174'];
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
